@@ -39,18 +39,18 @@ def preprocess_text(text):
     text = ' '.join([stemmer.stem(word) for word in text.split()])
 
     # Eliminamos los términos con frecuencias muy altas o bajas
-# Obtener palabras únicas y sus frecuencias
-vocabulario = vectorizer3.get_feature_names_out()
-frecuencias = count_vectorizer3.sum(axis=0).A1  # Sumar las frecuencias de cada palabra en el corpus
+    # Obtener palabras únicas y sus frecuencias
+    vocabulario = vectorizer3.get_feature_names_out()
+    frecuencias = count_vectorizer3.sum(axis=0).A1  # Sumar las frecuencias de cada palabra en el corpus
 
-# Crear un DataFrame para analizar la frecuencia de las palabras
-df_vocab = pd.DataFrame({'palabra': vocabulario, 'frecuencia': frecuencias})
-df_vocab = df_vocab.sort_values(by='frecuencia', ascending=False)
+    # Crear un DataFrame para analizar la frecuencia de las palabras
+    df_vocab = pd.DataFrame({'palabra': vocabulario, 'frecuencia': frecuencias})
+    df_vocab = df_vocab.sort_values(by='frecuencia', ascending=False)
 
-# Buscamos las palábras que tienen una frecuencia menor de 4
-baja_freq= df_vocab[df_vocab['frecuencia'] < 4]['palabra'].to_list()
+    # Buscamos las palábras que tienen una frecuencia menor de 4
+    baja_freq= df_vocab[df_vocab['frecuencia'] < 4]['palabra'].to_list()
 
-# Eliminamos todas las palabras que hemos metido en la lista de baja frecuencia
-text = ' '.join([word for word in text.split() if word not in (baja_freq)])
+    # Eliminamos todas las palabras que hemos metido en la lista de baja frecuencia
+    text = ' '.join([word for word in text.split() if word not in (baja_freq)])
 
-return text
+    return text

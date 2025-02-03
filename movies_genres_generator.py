@@ -1,10 +1,35 @@
-# Importamos todas las librerías necesarias
+import requests
 import joblib
 import streamlit as st
+import io
 import preprocesing_txt as pp
 
-# Cargamos el modelo de clasificación de géneros de películas
-#model = joblib.load('cc_model.pkl')
+# ID del archivo en Google Drive
+file_id = "1xbmt8qIzt1HixWo0e8uspNqzm1Y6ouT0"
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+# Iniciar sesión para manejar redirecciones de Google Drive
+session = requests.Session()
+response = session.get(url, stream=True)
+
+# Si Google Drive envía una página HTML en lugar del archivo, obtenemos la confirmación
+if "text/html" in response.headers.get("Content-Type", ""):
+    # Google Drive puede requerir confirmación para archivos grandes
+    for key, value in response.cookies.items():
+        if "download_warning" in key:
+            confirm_url = f"https://drive.google.com/uc?export=download&id={file_id}&confirm={value}"
+            response = session.get(confirm_url, stream=True)
+            break
+
+# Guardamos el contenido en memoria
+file_stream = io.BytesIO(response.content)
+
+try:
+    # Intentamos cargar el modelo
+    modelo = joblib.load(file_stream)
+    st.write("Modelo cargado correctamente")
+except Exception as e:
+    st.write(f"Error al cargar el modelo: {e}")
 
 
 # Creamos el título principal de la aplicación en Streamlit

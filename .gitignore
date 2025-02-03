@@ -46,7 +46,6 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
 cover/
@@ -79,7 +78,7 @@ target/
 .ipynb_checkpoints
 
 # IPython
-profile_default/
+ofile_default/
 ipython_config.py
 
 # pyenv

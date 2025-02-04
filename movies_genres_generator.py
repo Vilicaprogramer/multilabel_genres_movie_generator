@@ -45,3 +45,4 @@ st.write('En esta aplicación, muestra el poder del Machine Lerning para encontr
 text = st.text_input('Introduce aquí la sinopsis')
 # Creamos un botón para enviar la sinopsis
 button = st.button('Enviar')
+

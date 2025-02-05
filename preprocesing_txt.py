@@ -7,10 +7,15 @@ import numpy as np
 import string
 import nltk
 import joblib
+import model_load as ml
 
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 stop = stopwords.words('spanish')
+
+model = ml.model
+vectorizer = ml.tfidf
+mlb = ml.mlb
 
 # Creamos función para preprocesar el texto
 def preprocess_text(text):

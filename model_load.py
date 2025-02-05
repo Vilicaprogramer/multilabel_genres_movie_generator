@@ -18,7 +18,7 @@ gdown.download(url_mlb, output_mlb, quiet=False)
 gdown.download(url_tfidf, output_tfidf, quiet=False)
 
 # Cargar el modelo
-modelo = joblib.load(output)
+model = joblib.load(output)
 mlb = joblib.load(output_mlb)
 tfidf = joblib.load(output_tfidf)
-print("Modelos cargado correctamente.")
+print("Modelos cargados correctamente.")
